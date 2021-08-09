@@ -1,0 +1,26 @@
+https://www.geeksforgeeks.org/linked-list-set-1-introduction/
+
+Properties of Linked Lists:
+- Non-contiguos memory allocation unlike Arrays
+- Heterogenous Data-types
+- Dynamic in size
+- Easy insertion/Deletion
+
+Drawbacks:
+- No random access feature
+- Not memory efficient: Pointers will need extra space for each node
+- Not cache-friendly since not contiguous
+
+General code structure of Linked Lists:
+class LinkedList{
+    Node head;
+
+    class Node{
+        int data;
+        Node next;
+
+        Node(int data){
+            this.data = data;
+        }
+    }
+}
