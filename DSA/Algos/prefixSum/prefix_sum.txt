@@ -1,0 +1,44 @@
+Challenge links:
+    - https://www.hackerrank.com/challenges/crush/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=arrays
+    - https://www.geeksforgeeks.org/prefix-sum-array-implementation-applications-competitive-programming/
+
+
+Intro:
+    "Prefix sum" is about calculating the sum of elements till index 'j' starting from index '0'.
+    Ex: a = [1, 2, 3, 4, 5]
+    => prefixsum[] = [1, 3, 6, 10, 15]
+
+    -works for unsorted dataset also
+    -time complexity = O(m+n)
+
+Advantages: Reduces the time complexity of range_sum problems from O(m*n) to O(m+n)
+
+Applcations: Range sum problems, contiguos subarray manipulations, etc.
+
+
+Ex: A = [6, 3, -2, 4, -1, 0, -5], n = 7, range_queries(rq)= {[0->4], [0->6], [2->6], [3->5]}, m = |rq| = 4
+index    0  1   2  3   4  5   6
+=> ps = [6, 9, 7, 11, 10, 10, 5]
+
+rq.1 = [0->4], sum of elements of A from index 0 to 4.
+=> [6, 3, -2, 4, -1]
+=> sum(A, 0, 4) = ps[4] = 10
+
+rq.2 = [0->6], sum of elements of A from index 0 to 6.
+=> [6, 3, -2, 4, -1, 0, -5]
+=> sum(A, 0, 6) = ps[6] = 5
+
+rq.3 = [2->6], sum of elements of A from index 2 to 6.
+=> [-2, 4, -1, 0, -5]
+=> sum(A, 2, 6) = sum(A, 0, 6) - sum(A, 0, 1) = ps[6] - ps[1] = 5 - 9 = -4
+
+rq.4 = [3->5]
+=> [4, -1, 0]
+=> sum(A, 3, 5) = sum(A, 0, 5) - sum(A, 0, 2) = ps[5] - ps[2] = 10 - 7 = 3
+
+As seen in above steps we first compute and store the prefix_sum array once with time complexity O(n) and use it as a reference to find range_sum of each query.
+It is evident that finding range_sum of one query this way is of constant time complexity. So, if there are 'm' such queries the total time for range_sum would be O(m).
+
+Therefore, the total time complexity of the algorithm would be O(m+n).
+
+

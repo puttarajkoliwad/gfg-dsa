@@ -1,11 +1,11 @@
-package DSA.linked_lists;
+package DSA.DS.linked_lists;
 
 public class MyLinkedList {
-    Node head;
-    Node tail;
+    public Node head;
+    public Node tail;
     int length;
 
-    static class Node{
+    private static class Node{
         int data;
         Node next;
 
@@ -64,6 +64,89 @@ public class MyLinkedList {
             curr = curr.next;
         }
         return len;
+    }
+
+    //swap 2 nodes given the keys
+    public void swap(int x, int y){
+        if(x == y) return;
+        boolean xhead = false, yhead = false, xtail = false, ytail = false;
+         
+        // if(head.data == x && tail.data == y){
+        //     xhead = true;
+        //     ytail = true;
+        // }
+        // if(head.data == y && tail.data == x){
+        //     yhead = true;
+        //     xtail = true;
+        // }
+
+        if(head.data == x) xhead = true;
+        if(head.data == y) yhead = true;
+        if(tail.data == x) xtail = true;
+        if(tail.data == y) ytail = true;
+
+        Node curr = head, prevx = null, prevy = null;
+        while(curr.next != null){
+            if(curr.next.data == x){
+                prevx = curr;
+                curr = curr.next;
+            }else if(curr.next.data == y){
+                prevy = curr;
+                curr = curr.next;
+            }
+
+            if((xhead && ytail) || (xtail && yhead)){
+                if(head.next == tail){
+                    Node temp = head;
+                    head = tail;
+                    tail = temp;
+                    head.next = tail;
+                }else{
+                    Node temp = head;
+                    Node sec = head.next;
+                    head = tail;
+                    prevy.next = temp; 
+                    head.next = sec;   
+                }
+                
+                System.out.printf("swapped %d and %y\n", x, y);
+                printList();
+                return;
+            }
+
+            if(prevx != null && prevy != null){
+                Node rearnext;
+                if(xhead || yhead){
+                    Node sec = head.next;
+                    rearnext = xhead ? prevy.next.next : prevx.next.next;
+                    Node temp = head;
+                    head = xhead ? prevy.next : prevx.next;
+                    head.next = sec;
+                    temp.next = rearnext;
+                    Node rear = xhead ? prevy : prevx;
+                    rear.next = temp;
+                    
+                    System.out.printf("Swapped %d and %d", x, y);
+                    printList();
+                    return;
+                }
+
+                if(xtail || ytail){
+                    System.out.println("prevy: "+prevy);
+                    Node front = ytail ? prevx: prevy;
+                    Node frontnext = front.next.next;
+                    System.out.println("front: "+ front);
+                    Node temp = tail;
+                    tail = front.next;
+                    temp.next = frontnext;
+                    front.next = temp;
+                    System.out.printf("Swapped %d and %d\n", x, y);
+                    // printList();
+                    return;
+                }
+            }
+            
+        }
     }
 
     //Print the list nodes
@@ -134,6 +217,7 @@ public class MyLinkedList {
         return -1;
     }
 
+    //Deleting a node at given index
     public int deleteFrom(int index){
         int tar_data = -1;
         int ind = 0;
@@ -159,7 +243,7 @@ public class MyLinkedList {
 
                    //Re-assign tail if index references tail
                    if(index+1 == length) tail = temp;
-                   
+
                    tar_data = tar.data;
                    tar = null;
                    length--;
@@ -180,13 +264,7 @@ public class MyLinkedList {
         ll.push(9);
         System.out.println("Head: "+ll.head);
         System.out.println("Tail: "+ll.tail);
-        // ll.head = new Node(1);
-        // Node n2 = new Node(2);
-        // Node n3 = new Node(3);
-
-        // ll.head.next = n2;
-        // n2.next = n3;
-        // ll.tail = n3;
+        
         ll.push(2);
         ll.push(3);
 
@@ -208,10 +286,10 @@ public class MyLinkedList {
         System.out.println("Tail: "+ll.tail);
         ll.delete(6);
         System.out.println("Length: "+ll.length);
-        ll.deleteFrom(1);
+        // ll.deleteFrom(0);
+        ll.swap(2, 3);
         System.out.println("Head: "+ll.head);
         System.out.println("Tail: "+ll.tail);
-
-
+        // ll.printList();
     }
 }

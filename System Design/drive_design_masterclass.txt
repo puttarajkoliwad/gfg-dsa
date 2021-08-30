@@ -1,0 +1,6 @@
+To design Google drive:
+
+MVP: Minimum Viable Product
+
+LLD: Its about OOPs and usually solved using Class-Diagrams
+HLD: Its about the build and structure and involves system architecture. Ex.: Using AWS tools

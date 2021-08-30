@@ -5,6 +5,7 @@ Properties of Linked Lists:
 - Heterogenous Data-types
 - Dynamic in size
 - Easy insertion/Deletion
+- Heap memory: Memory allocated during runtime unlike Arrays (Heap: runtime, Stack: compile time)
 
 Drawbacks:
 - No random access feature
