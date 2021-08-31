@@ -1,0 +1,99 @@
+Challenge links:
+    - https://www.hackerrank.com/challenges/pairs/problem
+
+Intro:
+    "Two Pointers" method is powerful algorithm in finding the pairs in a list that add/substract up to 
+    give some desired number. This is NOT a 'value optimization' algorithm. This is a search algorithm.
+
+        Ex.: [1, 2, 3, 4, 5, 6], find the number of pairs for sumkey = 6, diffkey = 1
+
+        sumkey = 6: {(1,5), (2, 4)} is the solution set since these pairs add up to 6.
+            - The answer would be '2' here since there are only two pairs in our solution set.
+        
+        diffkey = 1: {(1, 2), (2, 3), (3, 4), (4, 5), (5, 6)} is the solution set since these are the only pairs that diff down to 1.
+            - The answer would be '5' in this case since there 5 pairs in our solution set.
+
+    Requirements: Sorted dataset
+        - The dataset/list should be sorted in order to use "Two pointers" algorithm. We can't use this technique data is not sorted!
+
+    Advantages:
+        - This algorithm optimizes the solution from O(N^2) to O(N) if the dataset/list is already sorted, and to O(NlogN) if the input is not sorted.
+    
+    Approach:
+        - For the sorted dataset we set two pointers 'i'(min_pointer) and 'j'(max_pointer) initially to two different indexes and move them
+        farther/closer based on the based on the problem statement.
+
+        - if the problem statement is to find the sum:
+            In this case we choose our 'i' and 'j' indices such that difference between a[j] and a[i] is maximum.
+            For a sorted dataset we can conclude that the maximum diff is between lowest element and the highest element.
+            i.e., for 'i=0' and 'j=a.length-1'
+        
+        - if the problem statement is to find the diff:
+            In this case we choose our 'i' and 'j' indices such that the diff between 'j' and 'i' itself is minimum.
+            And we also need to traverse the entire list at least once. Therefore, the ideal choices here would be 'i=0' and 'j=1'.
+
+Ex: A=[1, 2, 3, 4, 5, 6], K=6 find the number of pairs in 'A' that add up to 'K'
+         0  1  2  3  4  5
+    A = [1, 2, 3, 4, 5, 6]
+         i              j
+        minp            maxp
+
+        minp: min_pointer means the pointer/index referring to smaller value
+        maxp: max_pointer means the pointer/index referring to larger value
+        - smaller & larger are in comparison with the two pointers only, not with elements of entire array.
+        
+    Computation steps:
+    Let's have a pair_counter which stores the number of desirable pairs. We will initiate it to '0' and update its value by 1 everytime we find a desirable pair.
+    
+    => pair_counter = 0
+    
+    -    0  1  2  3  4  5
+    A = [1, 2, 3, 4, 5, 6], K=6
+         i              j
+        minp            maxp
+        => A[i] + A[j] = 1 + 6 = 7 > K
+            We need to move a pointer either minp or maxp. If we see the sum, its already greater than (K=6) so we need to lower this sum.
+            But, moving the minp to right would only be greater than 'K' since the dataset is sorted in ascending order next element of minp would obviously be greater than element at minp.
+            So, we move the maxp to left which would bring the sum closer to 'K'. Ulitmately we need to move the pointers in such a way that the sum is closer to 'K' than it used to be.
+
+    =>  [1, 2, 3, 4, 5, 6]
+         i           j
+        => A[i] + A[j] = 1 + 5 = 6 == K
+        Now we have a pair that gives us the desired sum 'K'. Lets increase the pair_counter value by 1.
+        => pair_counter = 1
+        Now, we can move any of the pointer, either minp or maxp. Let's move the minp to right.
+    
+    =>  [1, 2, 3, 4, 5, 6]
+            i        j
+        => A[i] + A[j] = 2 + 5 = 7 > K 
+        The sum is again greater than 'K', so we need to minimize by moving the maxp to left
+    
+    =>  [1, 2, 3, 4, 5, 6]
+            i     j
+        => A[i] + A[j] = 2 + 4 = 6 == K
+        The sum is desirable now, so we increment the value of pair_counter
+        => pair_counter = 2
+        Lets move the minp again now.
+
+    =>  [1, 2, 3, 4, 5, 6]
+               i     j
+        => A[i] + A[j] = 3 + 5 = 8 > K 
+        The sum is again greater than 'K', so we need to minimize by moving the maxp to left.
+
+    => [1, 2, 3, 4, 5, 6]
+              i  j
+        => A[i] + A[j] = 3 + 4 = 7 > K 
+        The sum is again greater than 'K', so we need to minimize by moving the maxp to left.
+
+    => [1, 2, 3, 4, 5, 6]
+             i=j
+        Now, both minp and maxp are pointing to the same element which is clearly a wrong computation, since it would be like considering the element twice.
+        Even if the sum A[i]+A[j] == K, (3, 3) wouldn't make it a pair, its just that we considering it twice. Anything beyond this would be a wrong computation.
+        So we stop our calcualation here!
+
+        Observation: We stop the computation if both minp and maxp are pointing to the same element, or if maxp > minp.
+        meaning we do the computations only when (minp < maxp), i.e, (i<j)
+    
+    After the computations, the value of pair_counter is answer, which is 2 in this case.
+
+

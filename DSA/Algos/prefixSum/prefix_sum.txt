@@ -13,7 +13,7 @@ Intro:
 
 Advantages: Reduces the time complexity of range_sum problems from O(m*n) to O(m+n)
 
-Applcations: Range sum problems, contiguos subarray manipulations, etc.
+Applications: Range sum problems, contiguos subarray manipulations, etc.
 
 
 Ex: A = [6, 3, -2, 4, -1, 0, -5], n = 7, range_queries(rq)= {[0->4], [0->6], [2->6], [3->5]}, m = |rq| = 4
