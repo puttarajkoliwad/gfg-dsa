@@ -1,4 +1,4 @@
-//https://www.hackerrank.com/challenges/pairs/problem
+// https://www.hackerrank.com/challenges/pairs/problem
 
 import java.util.Collections;
 import java.io.BufferedReader;
@@ -33,6 +33,9 @@ class TwoPointers1 {
 
     static long twoPointers(List<Integer> a, int n, long k) {
         long paircount = 0;
+
+        //Initializing minp to index '0' and maxp to next-immediate index, cause we are checking for difference and need to avoid ambiguity.
+        //If we initialize at end indices, we might run into ambiguity of "which pointer to move" when difference is greater since moving any pointer will reduce the difference.
         int i=0, j=1;
         Collections.sort(a);
         while(j<n){
