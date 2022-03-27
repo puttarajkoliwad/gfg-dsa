@@ -1,3 +1,6 @@
+// Combination: Where order doesn't count => {2,3} and {3,2} are counted as same 1 entry
+// Problem statement: https://www.pepcoding.com/resources/online-java-foundation/dynamic-programming-and-greedy/coin-change-combination-official/ojquestion
+
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
