@@ -12,6 +12,21 @@ public class StocksInfiniteTransactions {
         for(int i = 0; i < n; i++){
             arr[i] = Integer.parseInt(br.readLine());
         }
-        
+        int max_gain = stocksInfiniteTransactions(arr);
+        System.out.println(max_gain);
+    }
+
+    public static int stocksInfiniteTransactions(int[] arr){
+        int n = arr.length;
+        int buy = arr[0];
+        int total_profit = 0;
+        for(int i = 1; i < n; i++){
+            if(arr[i] <= buy) buy = arr[i];
+            else{
+                total_profit += arr[i] - buy;
+                buy = arr[i];
+            }
+        }
+        return total_profit;
     }
 }
