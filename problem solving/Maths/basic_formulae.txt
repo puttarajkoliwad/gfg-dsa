@@ -10,11 +10,23 @@
   - There are 25 even numbers from 1-50 => N = 25
   => S_even(25) = 2 + 4 + 6 + ... + 48 + 50 = 25 *(25 + 1) = 25 * 26 = 650
 
-04) Sum of first N natural numbers: factorial(N) = N!
+04) Product of first N natural numbers: factorial(N) = N!
 
-05) Sum of first N odd numbers:
+05) Product of first N odd numbers:
       2 * N!
     ----------
      (2^N)(N!)
 
-06) Sum of first N even numbers: (2^N)*(N!)
+06) Product of first N even numbers: (2^N)*(N!)
+
+07) Fermat's Last Theorem(FTM): https://www.researchgate.net/publication/309399897_Solution_for_Fermat%27s_Last_Theorem
+  - Equation (x^n)+(y^n) = (z^n) does NOT have a positive solution for ((x,y>0), ('n' >= 3))
+
+
+==== Modular Identities =====
+08) (a%n)%n = a%n
+
+09) (n^x)%n = 0, for x in +ve integers
+
+10) a(b^(p-1))%p = a%p, for p is a Prime and (b%p != 0)
+  - by Fermat's theorem
