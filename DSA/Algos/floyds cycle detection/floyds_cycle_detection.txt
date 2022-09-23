@@ -1,0 +1,51 @@
+Challenge links: https://www.geeksforgeeks.org/floyds-cycle-finding-algorithm/, https://leetcode.com/problems/find-the-duplicate-number/
+
+Floyd's Cycle detection algorithm(Floyd's algorithm):
+=====================================================
+
+Intro:
+	"Floyd's algorithm" is mainly used to check if a given "linked list" has cycles in it or not.
+
+	- When can cycle occur in a linked list?
+		In a linked list, a cycle can appear in two ways:
+		01) tail pointing to head
+		02) two different nodes(tail node and some other body node) pointing to same(body) node.
+
+		Eg.1: [1->2, 2->3, 3->4, 4->5, 5->1] // head = 1, tail = 5, tails is pointing towards head(5->1), so there is a cycle.
+
+		Eg.2: [1->2, 2->3, 3->4, 4->5, 5->3] // 2->3 and 5->3, (one of the node always happends to be tail(5))
+	
+	- Works for all types of "Linked List".
+		- NOT a graph algorithm. But can be used by traversing all child nodes of the parent node.
+
+
+Methodology:
+	This algorithm works by using two traversal pointers. One pointer moves twice the speed of other pointer.
+	- If there is no cycle, fast pointer will reach the dead end(tail->null), and two pointers will never intersect.
+	- If there is a cycle, both pointers will keep on looping forever, and at some point the two will intersect(point to same node). This intersection is the significance of presence of the cycle.
+
+	Eg.: list = [1->2, 2->3, 3->4, 4->1', 1'->3]
+	// Here 1 and 1' are not the same nodes, they are two diffrent nodes having same value. I have taken this to show that Floyd's algorithm works for duplicate node values also.
+
+	Steps:
+	======
+	01) Initiate both slow & fast pointer to head node.
+		list = [1->2, 2->3, 3->4, 4->1', 1'->3]
+				slow
+				fast
+
+	02) Move slow pointer 1 step at time, fast pointer 2 steps at a time.
+			list = [1->2, 2->3, 3->4, 4->1', 1'->3]
+						  slow
+								fast
+
+				   [1->2, 2->3, 3->4, 4->1', 1'->3]
+						  		slow
+											 fast
+
+				   [1->2, 2->3, 3->4, 4->1', 1'->3]
+						  			  slow
+									  fast
+
+			As you can see, fast pointer doesn't hit any dead-end(null) and completes one full round of the list and then intersect with slow pointer on the 3rd move indicating the presence of a cycle. Return true if intersected.
+			** Here "4" is just the intesection node, may not be the start of the cycle, may not be the end of the cycle.

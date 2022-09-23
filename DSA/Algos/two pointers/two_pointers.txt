@@ -2,8 +2,7 @@ Challenge links:
     - https://www.hackerrank.com/challenges/pairs/problem
 
 Intro:
-    "Two Pointers" method is powerful algorithm in finding the pairs in a list that add/substract up to 
-    give some desired number. This is NOT a 'value optimization' algorithm. This is a search algorithm.
+    "Two Pointers" method is powerful algorithm in finding the pairs in a list that add/substract up to give some desired number. This is NOT a 'value optimization' algorithm. This is a search algorithm.
 
         Ex.: [1, 2, 3, 4, 5, 6], find the number of pairs for sumkey = 6, diffkey = 1
 
