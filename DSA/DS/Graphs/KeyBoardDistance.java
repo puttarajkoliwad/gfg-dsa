@@ -35,8 +35,20 @@ class KeyBoardDistance{
   
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    String[] keys = br.readLine().split("\\|");
-    String str = br.readLine().trim().toLowerCase();
+    StringBuilder sb = new StringBuilder();
+    String line = "";
+    while((line = br.readLine()) != null && !line.isEmpty()){
+      sb.append(" ").append(line);
+    }
+    String str_input = sb.toString().replace('|', ' ');
+    // System.out.print(str_input);
+    String[] raw_input = str_input.trim().split("\\s+");
+    String[] keys = new String[raw_input.length-1];
+    for(int i = 0; i < keys.length; i++){
+      keys[i] = raw_input[i];
+    }
+    String str = raw_input[keys.length];
+    // System.out.println("str: "+str);
     int longestRow = 0;
 
     if(str.length() == 1){
