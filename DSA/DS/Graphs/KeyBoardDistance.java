@@ -37,17 +37,24 @@ class KeyBoardDistance{
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     StringBuilder sb = new StringBuilder();
     String line = "";
+    ArrayList<String> lines = new ArrayList<String>();
     while((line = br.readLine()) != null && !line.isEmpty()){
-      sb.append(" ").append(line);
+      // sb.append(" ").append(line);
+      lines.add(line);
     }
-    String str_input = sb.toString().replace('|', ' ');
+    // String str_input = sb.toString().replace('|', ' ');
     // System.out.print(str_input);
-    String[] raw_input = str_input.trim().split("\\s+");
-    String[] keys = new String[raw_input.length-1];
-    for(int i = 0; i < keys.length; i++){
-      keys[i] = raw_input[i];
+    String[] keys = new String[lines.size()-1];
+    for(int i=0; i<keys.length; i++){
+      keys[i] = lines.get(i).replace('|', ' ').trim();
     }
-    String str = raw_input[keys.length];
+    // String[] raw_input = str_input.trim().split("\\s+");
+    // String[] keys = new String[raw_input.length-1];
+    // for(int i = 0; i < keys.length; i++){
+    //   keys[i] = raw_input[i];
+    // }
+    // String str = raw_input[keys.length];
+    String str = lines.get(keys.length).toLowerCase();
     // System.out.println("str: "+str);
     int longestRow = 0;
 
@@ -124,15 +131,18 @@ class KeyBoardDistance{
         int y1 = indices.get(i)[1];
         double new_dist = w.distance + calculateDistance(w.x, w.y, x1, y1);
         if(sec_last_char){
+          // System.out.println("dist_till_now: "+w.distance);
+          // System.out.println("new_dist: "+calculateDistance(w.x, w.y, x1, y1));
           total_distance = Math.min(new_dist, total_distance);
         }
-        pq.add(new Word(x1, y1, next_c, new_dist, w.currIndexInStr + 1));
+        if(w.currIndexInStr < str.length()-2) pq.add(new Word(x1, y1, next_c, new_dist, w.currIndexInStr + 1));
       }
-      if(sec_last_char){
-        System.out.println("Total distance: " + Math.round(total_distance * 10.0)/10.0);
-        break;
-      }
+      // if(sec_last_char){
+      //   System.out.println("Total distance: " + Math.round(total_distance * 10.0)/10.0);
+      //   break;
+      // }
     }  
+    System.out.println("Total distance: " + Math.round(total_distance * 10.0)/10.0);
   }
 
   /**
@@ -144,6 +154,7 @@ class KeyBoardDistance{
    */
   public static double calculateDistance(int x0, int y0, int x1, int y1){
     // System.out.println("x1: " + x1 + ", y1: " + y1 + ", x0: " + x0 + ", y0: ");
+    // Need to handle the "Direction not changed case!!"
     return Math.sqrt(Math.pow(x1-x0, 2) + Math.pow(y1-y0, 2));
   }
 
