@@ -38,7 +38,7 @@ public class KnapsackFractional{
             gain += Math.min(arr[i].volume, vol) * arr[i].density;
             vol -= arr[i].volume;
         }
-
+        
         return gain;
     }
 }

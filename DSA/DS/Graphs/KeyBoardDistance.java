@@ -32,6 +32,7 @@ class KeyBoardDistance{
 
   public static char[][] keyboard;
   public static PriorityQueue<Word> pq = new PriorityQueue<Word>();
+  public static HashMap<Character, ArrayList<Integer[]>> hm = new HashMap<Character, ArrayList<Integer[]>>();
   
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -60,7 +61,7 @@ class KeyBoardDistance{
 
     keyboard = buildKeyBoard(keys, longestRow);
 
-    HashMap<Character, ArrayList<Integer[]>> hm = new HashMap<Character, ArrayList<Integer[]>>();
+    // HashMap<Character, ArrayList<Integer[]>> hm = new HashMap<Character, ArrayList<Integer[]>>();
     for(int i=0; i<keyboard.length; i++){
       for(int j=0; j<keyboard[i].length; j++){
         char c = keyboard[i][j];
@@ -90,13 +91,39 @@ class KeyBoardDistance{
 
     double total_distance = Double.MAX_VALUE;
 
-    while(!pq.isEmpty()){
+    // while(!pq.isEmpty()){
+    //   Word w = pq.poll();
+    //   char next_c = str.charAt(w.currIndexInStr + 1);
+    //   boolean sec_last_char = (w.currIndexInStr == str.length()-2);
+    //   if(!hm.containsKey(next_c)){
+    //     System.out.println("-1.0");
+    //     break;
+    //   }
+    //   ArrayList<Integer[]> indices = hm.get(next_c);
+    //   for(int i = 0; i < indices.size(); i++){
+    //     int x1 = indices.get(i)[0];
+    //     int y1 = indices.get(i)[1];
+    //     double new_dist = w.distance + calculateDistance(w.x, w.y, x1, y1);
+    //     if(sec_last_char){
+    //       total_distance = Math.min(new_dist, total_distance);
+    //     }
+    //     if(w.currIndexInStr < str.length()-2) pq.add(new Word(x1, y1, next_c, new_dist, w.currIndexInStr + 1));
+    //   }
+    // } 
+    total_distance = getTotalDistance(pq, total_distance, str, str.length()); 
+    System.out.println(Math.round(total_distance * 10.0)/10.0);
+  }
+
+  public static double getTotalDistance(PriorityQueue<Word> pq, double ans, String str, int len){
+    if(pq.isEmpty()){
+      return ans;
+    }else{
       Word w = pq.poll();
       char next_c = str.charAt(w.currIndexInStr + 1);
-      boolean sec_last_char = (w.currIndexInStr == str.length()-2);
+      boolean sec_last_char = w.currIndexInStr == len-2;
       if(!hm.containsKey(next_c)){
-        System.out.println("-1.0");
-        break;
+        // System.out.println("-1.0");
+        return -1.0;
       }
       ArrayList<Integer[]> indices = hm.get(next_c);
       for(int i = 0; i < indices.size(); i++){
@@ -104,12 +131,13 @@ class KeyBoardDistance{
         int y1 = indices.get(i)[1];
         double new_dist = w.distance + calculateDistance(w.x, w.y, x1, y1);
         if(sec_last_char){
-          total_distance = Math.min(new_dist, total_distance);
+          ans = Math.min(new_dist, ans);
         }
-        if(w.currIndexInStr < str.length()-2) pq.add(new Word(x1, y1, next_c, new_dist, w.currIndexInStr + 1));
+        if(w.currIndexInStr < len-2) pq.add(new Word(x1, y1, next_c, new_dist, w.currIndexInStr + 1));
       }
-    }  
-    System.out.println(Math.round(total_distance * 10.0)/10.0);
+      getTotalDistance(pq, ans, str, len);
+    }
+    return ans;
   }
 
   public static double calculateDistance(int x0, int y0, int x1, int y1){
