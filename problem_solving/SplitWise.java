@@ -127,6 +127,7 @@ class SplitWise{
             payables = new int[memberCount][membersCount];
             for(int i=0; i<memberCount; i++){
                 for(int j=0; j<membersCount; j++){
+                    System.out.println(payables[i][j]);
                     if(i==j) payables[i][j] = 0;
                     else{
                         // payables[i][j] = payables[j][i] = (int)Math.ceil((double)expenses.get(users[i])/(double)totalExpense * (double)membersCount); // This wrong calculation was suggested by tab9 intelligence/github copilot
