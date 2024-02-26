@@ -1,9 +1,20 @@
-package DSA.Algos.prefixSum;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+
+//sample test case input:
+// 7
+// 6 3 -2 4 -1 0 -5
+// 4
+// 0 4
+// 0 6
+// 2 6
+// 3 5
+
+//output
+// 10 5 -4 3 
 class PrefixSum{
 
     public static void main(String[] args) throws IOException {

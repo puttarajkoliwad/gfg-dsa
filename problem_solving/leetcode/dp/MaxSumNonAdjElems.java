@@ -1,4 +1,5 @@
 // problem statement: https://www.pepcoding.com/resources/online-java-foundation/dynamic-programming-and-greedy/maximum_sum_non_adjacent_elements/topic
+// hackerrank: https://www.hackerrank.com/challenges/max-array-sum/problem?h_r=internal-search
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
