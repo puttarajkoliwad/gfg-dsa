@@ -4,6 +4,8 @@
 
 // formula used: a * b = LCM(a,b) * HCF(a,b)
 
+// prerequisites: './GcdHcf.java'
+
 // package Maths;
 // import Maths.GcdHcf;
 
