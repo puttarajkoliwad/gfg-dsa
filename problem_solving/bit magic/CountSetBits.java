@@ -18,6 +18,7 @@ class CountSetBits{
   static int optimizedBrianAndKerninghamAlgo(int n){
     return lookUp[n&255] + lookUp[(n>>8)&255] + lookUp[(n>>16)&255] + lookUp[n>>24];
   }
+  
   public static void main(String[] args) {
     System.out.println(optimizedBrianAndKerninghamAlgo(11));
     System.out.println(optimizedBrianAndKerninghamAlgo(7));
