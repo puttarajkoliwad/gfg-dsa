@@ -26,4 +26,9 @@ Used to store negative numbers
 
 ### Formulae:
 1. **N&(N-1)**: This operation will always unset the **LSB** in N.
-2. `0xFF`: **0x** indicates it's hexa-decimal representation. **F** indicated **first four set bits** here. Similarly, **FF** indicates first 8 set bits.
+2. **a^0 = a**
+3. **a^b = b^a**: XOR operation is commutative
+4. **a^(b^c) = (a^b)^c = (a^c)^b**: XOR operation is associative  
+5. **a^a = 0**
+6. `0xFF`: **0x** indicates it's hexa-decimal representation. **F** indicated **first four set bits** here. Similarly, **FF** indicates first 8 set bits.
+. 
