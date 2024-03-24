@@ -47,5 +47,6 @@ class FlipBits{
 
   public static void main(String[] args) {
     System.out.println(flipBits(23));
+    System.out.println((~23));
   }
 }
