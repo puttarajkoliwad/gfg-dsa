@@ -1,4 +1,7 @@
-# https://leetcode.com/problems/contains-duplicate/description/
+# nc1: https://leetcode.com/problems/contains-duplicate/description/
+
+# space complexity: O(n)
+# time complexity: O(n)
 
 def contains_duplicates(nums)
   s = Set.new([])
